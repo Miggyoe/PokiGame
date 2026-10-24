@@ -5,7 +5,12 @@ def random_pokemon():
     pokemonID = random.randint(1,1351)
     url = f"https://pokeapi.co/api/v2/pokemon/{pokemonID}"
     x = requests.get(url)
-    return x.json()
+
+    if x.status_code == 200:
+        return x.json()
+    else:
+        print("Failed to fetch")
+        return None
 
 def play_game():
     data = random_pokemon()
@@ -20,7 +25,7 @@ def play_game():
     print(f"Height: {height}cm")
     print(f"Weight: {weight}kg")
 
-    tries = 5
+    tries = 3
 
     while tries:
         print(f"="*30)
